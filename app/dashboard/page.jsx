@@ -15,7 +15,8 @@ const getTickets = async () => {
             apiUrl = process.env.DEV_API_URL;
         }
 
-        const res = await fetch(`${apiUrl}`, {
+        // const res = await fetch(`${apiUrl}`, {
+        const res = await fetch("http://localhost:3000/api/Tickets", {
             cache: "no-store",
         });
 
