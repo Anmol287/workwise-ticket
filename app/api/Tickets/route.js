@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const tickets = await Ticket.find();;
+        const tickets = await Ticket.find();
+        console.log("Tickets counts "+tickets.length)
         return NextResponse.json({ tickets }, { status: 200 })
     } catch (error) {
         console.log(error)
