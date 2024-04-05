@@ -28,7 +28,7 @@ const Ticketform = ({ ticket }) => {
             if (!res.ok) {
                 throw new Error("Failed to UpdateTicket")
             }
-            router.push("/")
+            router.push("/dashboard")
             router.refresh()
         }
         else {
