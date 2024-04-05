@@ -48,6 +48,7 @@ export default function LoginForm() {
                                     type="email"
                                     placeholder="Enter your email address"
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
@@ -59,7 +60,9 @@ export default function LoginForm() {
                                     placeholder="Enter your password"
                                     onChange={(e) => setPassword(e.target.value)}
                                     minLength={5}
-                                    maxLength={8} />
+                                    maxLength={8} 
+                                    required
+                                    />
                             </div>
                         </div>
                     </div>
