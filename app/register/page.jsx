@@ -10,8 +10,8 @@ export const metadata = {
 };
 
 const page = async () => {
-  const session = await getServerSession(authOptions);
-  if (session) redirect("/dashboard");
+  // const session = await getServerSession(authOptions);
+  // if (session) redirect("/dashboard");
   return (
     <main>
       <RegisterForm />
