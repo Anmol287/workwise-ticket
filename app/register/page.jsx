@@ -1,22 +1,22 @@
-import LoginForm from '../(components)/LoginForm';
+import React from 'react'
+import RegisterForm from '../(components)/RegisterForm'
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const metadata = {
-  title: "Login",
-  description: "Login page for allowing only authorized people, created by Anmol Kansal",
+  title: "Register yourself",
+  description: "Registering page for new people, created by Anmol Kansal",
 };
 
-const Page = async () => {
+const page = async () => {
   const session = await getServerSession(authOptions);
   if (session) redirect("/dashboard");
-  
   return (
     <main>
-    <LoginForm />
+      <RegisterForm />
     </main>
-  );
+  )
 }
-export default Page;
 
+export default page

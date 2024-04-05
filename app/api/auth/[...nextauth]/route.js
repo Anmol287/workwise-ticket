@@ -1,7 +1,9 @@
-import { Formlogin } from "@/app/(models)/mongodb";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcryptjs";
+import { User } from "@/app/models/schema";
+import { connectMongoDB } from "@/app/lib/mongodb";
+
 export const authOptions = {
     providers: [
         CredentialsProvider({
@@ -9,25 +11,25 @@ export const authOptions = {
             credentials: {},
 
             async authorize(credentials) {
-                const { username, password } = credentials;
+                const { email, password } = credentials;
+
                 try {
+                    await connectMongoDB();
+                    const user = await User.findOne({ email });
 
-                    const existingUser = await Formlogin.findOne({ username });
-                    console.log("email", existingUser);
-
-                    if (!existingUser) {
+                    if (!user) {
                         return null;
                     }
-                    const passwordsMatch = await bcrypt.compare(password, existingUser.password);
+
+                    const passwordsMatch = await bcrypt.compare(password, user.password);
 
                     if (!passwordsMatch) {
                         return null;
                     }
-                    return existingUser;
 
-
+                    return user;
                 } catch (error) {
-                    console.log("error", error);
+                    console.log("Error: ", error);
                 }
             },
         }),
@@ -43,4 +45,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };

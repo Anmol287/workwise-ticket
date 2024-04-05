@@ -2,15 +2,11 @@
 import { faHome, faSignOut, faTicket, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
-import { getSession, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 
 const Nav = () => {
-    const { data: session, status } = useSession();
-
-    // Check if session exists and contains user data
-    const isLoggedIn = session && session.user && session.user.username;
-    console.log(session)
+    const { data: session } = useSession();
 
     return (
         <nav className="flex justify-between bg-teal-800 p-6">
@@ -26,7 +22,7 @@ const Nav = () => {
             <div className="flex justify-between">
 
                 <FontAwesomeIcon icon={faUser} className="icon hover:scale-150 mr-2 text-white" />
-                <p className="text-default-text">{`Welcome, ${session?.user?.username}`}</p>
+                <p className="text-default-text">{`Welcome ${session?.user?.name} 😎`}</p>
                 <button><FontAwesomeIcon icon={faSignOut} className="icon hover:scale-125 text-white mx-4" onClick={() => signOut()} /></button>
             </div>
         </nav>

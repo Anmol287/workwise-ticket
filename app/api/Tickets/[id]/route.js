@@ -1,5 +1,4 @@
-
-import Ticket from "@/app/(models)/mongodb";
+import {Ticket} from "@/app/models/schema";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
@@ -30,8 +29,9 @@ export async function PUT(req, { params }) {
 
         const UpdateTicketData = await Ticket.findByIdAndUpdate(id, { ...ticketData })
 
-        console.log(UpdateTicketData)
+
         return NextResponse.json({ message: "Ticket Updated" }, { status: 200 });
+        
     } catch (error) {
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
